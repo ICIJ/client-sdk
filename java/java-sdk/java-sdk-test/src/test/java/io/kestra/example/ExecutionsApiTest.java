@@ -1032,7 +1032,7 @@ public class ExecutionsApiTest {
 
         kestraClient().executions().followExecution(executionId, MAIN_TENANT)
                 .doOnNext(event -> {
-                    assertThat(event.getFlowId()).isEqualTo(execution.getFlowId());
+                    assertThat(event.getData().getFlowId()).isEqualTo(execution.getFlowId());
                 })
                 .doFinally(signalType -> {
                     completionLatch.countDown();
@@ -1053,7 +1053,7 @@ public class ExecutionsApiTest {
 
         kestraClient().executions().followDependenciesExecution(executionId, MAIN_TENANT, false, true)
                 .doOnNext(event -> {
-                    assertThat(event.getFlowId()).isEqualTo(execution.getFlowId());
+                    assertThat(event.getData().getFlowId()).isEqualTo(execution.getFlowId());
                 })
                 .doFinally(signalType -> {
                     completionLatch.countDown();

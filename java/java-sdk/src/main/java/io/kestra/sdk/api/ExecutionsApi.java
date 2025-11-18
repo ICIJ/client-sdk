@@ -1019,7 +1019,7 @@ import java.util.StringJoiner;
 
 
 
-  public Flux<Execution> followDependenciesExecution(@javax.annotation.Nonnull String executionId, @javax.annotation.Nonnull String tenant, boolean destinationOnly, boolean expandAll) throws ApiException {
+  public Flux<EventExecutionStatusEvent> followDependenciesExecution(@javax.annotation.Nonnull String executionId, @javax.annotation.Nonnull String tenant, boolean destinationOnly, boolean expandAll) throws ApiException {
     return Flux.create(sink -> {
       org.apache.hc.client5.http.impl.classic.CloseableHttpResponse response = null;
       BufferedReader reader = null;
@@ -1039,7 +1039,7 @@ import java.util.StringJoiner;
               dataBuffer.setLength(0);
 
               try {
-                Execution ev = apiClient.getObjectMapper().readValue(data, Execution.class);
+                EventExecutionStatusEvent ev = apiClient.getObjectMapper().readValue(data, EventExecutionStatusEvent.class);
                 sink.next(ev);
               } catch (Exception e) {
                 sink.error(new ApiException(e));
@@ -1059,7 +1059,7 @@ import java.util.StringJoiner;
         if (dataBuffer.length() > 0) {
           String data = dataBuffer.toString();
           try {
-            Execution ev = apiClient.getObjectMapper().readValue(data, Execution.class);
+            EventExecutionStatusEvent ev = apiClient.getObjectMapper().readValue(data, EventExecutionStatusEvent.class);
             sink.next(ev);
           } catch (Exception e) {
             sink.error(new ApiException(e));
@@ -1129,7 +1129,7 @@ import java.util.StringJoiner;
   }
 
 
-  public Flux<Execution> followExecution(@javax.annotation.Nonnull String executionId, @javax.annotation.Nonnull String tenant) throws ApiException {
+  public Flux<EventExecution> followExecution(@javax.annotation.Nonnull String executionId, @javax.annotation.Nonnull String tenant) throws ApiException {
     return Flux.create(sink -> {
       org.apache.hc.client5.http.impl.classic.CloseableHttpResponse response = null;
       BufferedReader reader = null;
@@ -1149,7 +1149,7 @@ import java.util.StringJoiner;
               dataBuffer.setLength(0);
 
               try {
-                Execution ev = apiClient.getObjectMapper().readValue(data, Execution.class);
+                EventExecution ev = apiClient.getObjectMapper().readValue(data, EventExecution.class);
                 sink.next(ev);
               } catch (Exception e) {
                 sink.error(new ApiException(e));
@@ -1169,7 +1169,7 @@ import java.util.StringJoiner;
         if (dataBuffer.length() > 0) {
           String data = dataBuffer.toString();
           try {
-            Execution ev = apiClient.getObjectMapper().readValue(data, Execution.class);
+            EventExecution ev = apiClient.getObjectMapper().readValue(data, EventExecution.class);
             sink.next(ev);
           } catch (Exception e) {
             sink.error(new ApiException(e));
